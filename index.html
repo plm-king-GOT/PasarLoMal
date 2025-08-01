@@ -2,116 +2,145 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Pasar Lo Mal – Web (Dark)</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+  <title>Pasar Lo Mal</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <meta name="theme-color" content="#0c0c0f" />
   <style>
-    :root {
-      --c-bg:#0c0c0f;
-      --c-surface:rgba(255,255,255,.06);
-      --c-border:rgba(255,255,255,.12);
-      --c-border-strong:rgba(255,255,255,.28);
-      --c-primary:#d72638;
-      --c-primary-dark:#b61a29;
-      --c-danger:#ff4655;
-      --c-warning:#ffb700;
-      --blur:18px;
-      --card-w:64px;
-      --card-h:90px;
+    /* ============ THEME VARS ============ */
+    :root{
+      --bg:#0b0b0e;--surface:#191923cc;--border:#32323d;--primary:#e000c8;--primary-dark:#b3009c;--danger:#ff3043;--info:#00e4ff;
+      --card-w:64px;--card-h:90px;--blur:24px;--noise:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNgYAIAAAUAAarVyFEAAAAASUVORK5CYII=');
     }
-    html,body{margin:0;padding:0;background:var(--c-bg);font-family:"Inter",system-ui,sans-serif;color:#f1f1f1;}*{box-sizing:border-box;}
-    h1{margin:0 0 1rem;text-align:center;font-weight:700;letter-spacing:-.02em;color:#fff;}h3{margin:0 0 .6rem;font-weight:600;color:#fff;}
-    .container{max-width:980px;margin:0 auto;padding:24px;}
-    .panel{background:var(--c-surface);backdrop-filter:blur(var(--blur));-webkit-backdrop-filter:blur(var(--blur));border:1px solid var(--c-border);border-radius:18px;padding:24px;box-shadow:0 6px 18px rgba(0,0,0,.6);margin-bottom:24px;}
-    .btn{width:100%;display:inline-flex;justify-content:center;align-items:center;gap:.4rem;padding:14px 20px;margin:6px 0;font-size:1rem;font-weight:600;border-radius:12px;background:var(--c-primary);color:#fff;border:1px solid var(--c-primary-dark);cursor:pointer;transition:background .2s,transform .1s;}
-    .btn:hover{background:var(--c-primary-dark);} .btn:active{transform:scale(.97);} .btn.secondary{background:transparent;color:var(--c-primary);border-color:var(--c-primary);} .btn.secondary:hover{background:rgba(215,38,56,.15);} .btn:disabled{background:#444;border-color:#444;color:#777;cursor:not-allowed;}
-    input[type="number"],input[type="text"]{width:100%;padding:12px 14px;margin:4px 0 10px;font-size:1rem;border-radius:12px;background:#1a1a1a;color:#f5f5f5;border:1px solid var(--c-border-strong);} input::placeholder{color:#777;}
-    .pill{display:inline-flex;align-items:center;gap:6px;padding:8px 12px;background:#1a1a1a;border:1px solid var(--c-border-strong);border-radius:999px;font-weight:500;margin:4px 4px;} .pill input{border:none;background:transparent;width:80px;color:#fff;} .pill button{all:unset;cursor:pointer;color:#888;font-weight:700;}
-    .lines{margin:24px 0;} .line{display:flex;flex-wrap:wrap;gap:10px;padding:14px 12px;border-radius:16px;background:rgba(255,255,255,.04);border:1px solid var(--c-border);backdrop-filter:blur(calc(var(--blur)/1.5));margin:12px 0;min-height:calc(var(--card-h)+14px);} .card{width:var(--card-w);height:var(--card-h);background:linear-gradient(135deg,#2a2a2a 0%,#1a1a1a 100%);border-radius:12px;border:1px solid var(--c-border-strong);display:flex;flex-direction:column;justify-content:space-between;align-items:center;padding:6px;font-weight:600;color:#e2e2e2;box-shadow:0 1px 4px rgba(0,0,0,.9);user-select:none;transition:transform .15s,box-shadow .15s;} .card.red{color:var(--c-danger);} .rank,.suit{font-size:1.05rem;}
-    .clickable{cursor:pointer;} .clickable:hover{transform:translateY(-2px);box-shadow:0 6px 14px rgba(0,0,0,.8);} .clickable:active{transform:scale(.95);} .current-card{background:#571414;border-color:#7d1e27;}
-    .banner{text-align:center;font-size:1rem;font-weight:600;padding:18px 20px;border-radius:16px;} .banner.success{background:#14532d;color:#c8facc;} .banner.fail{background:#7f1d1d;color:#fca5a5;} .banner.equal{background:#444005;color:#fde047;}
-    #gameLog{max-height:260px;overflow-y:auto;padding:16px;border-radius:18px;background:#1a1a1a;border:1px solid var(--c-border);backdrop-filter:blur(calc(var(--blur)/2));} .log-entry{margin:6px 0;font-size:.9rem;opacity:.85;}
-    @media(max-width:600px){:root{--card-w:52px;--card-h:74px;} .panel{padding:20px;}}
+
+    /* ============ RESET & BASE ============ */
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%;font-family:'Inter',system-ui,sans-serif;background:var(--bg) var(--noise) repeat;color:#f4f4f7;-webkit-tap-highlight-color:transparent}
+    h1{font-size:1.75rem;font-weight:700;text-align:center;color:#fff;margin:12px 0 24px}
+    h3{font-size:1.05rem;font-weight:600;color:#fff;margin-bottom:8px}
+    .container{max-width:960px;margin:auto;padding:24px}
+
+    /* ============ PANELS & GLASS ============ */
+    .panel{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:22px 20px;margin-bottom:22px;backdrop-filter:blur(var(--blur));box-shadow:0 6px 22px rgba(0,0,0,.65)}
+
+    /* ============ BUTTONS ============ */
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:.4rem;padding:10px 16px;margin:6px 0;border-radius:12px;border:1px solid var(--primary-dark);background:var(--primary);color:#fff;font-size:.95rem;font-weight:600;text-decoration:none;transition:.2s;white-space:nowrap;cursor:pointer}
+    .btn:hover{background:var(--primary-dark)}.btn:active{transform:scale(.97)}
+    .btn.wide{width:100%}
+    .btn.secondary{background:transparent;color:var(--primary);border-color:var(--primary)}.btn.secondary:hover{background:rgba(224,0,200,.12)}
+    .btn.small{padding:8px 12px;font-size:.9rem}
+    .btn.small .card{flex:none;width:calc(var(--card-w)*.55);height:calc(var(--card-h)*.55)}
+    .btn:disabled{opacity:.45;cursor:not-allowed}
+
+    /* ============ INPUTS & PILLS ============ */
+    input[type="number"],input[type="text"]{width:100%;padding:11px 14px;margin:4px 0 10px;border-radius:12px;border:1px solid var(--border);background:#101014;color:#eee;font-size:.95rem}
+    input::placeholder{color:#777}
+    .pill{display:inline-flex;align-items:center;gap:6px;background:#101014;border:1px solid var(--border);border-radius:999px;padding:6px 10px;margin:3px}
+    .pill input{border:none;background:transparent;color:#eee;width:70px;font-size:.9rem}
+    .pill button{all:unset;color:#888;font-weight:700;cursor:pointer;font-size:.9rem;line-height:1}
+
+    /* ============ CARDS & RAILS ============ */
+    .lines{margin:18px 0}
+    .line{display:flex;flex-wrap:nowrap;gap:8px;overflow-x:auto;padding:14px 10px;border:1px solid var(--border);border-radius:16px;background:rgba(255,255,255,.04)}
+    .card{flex:0 0 var(--card-w);width:var(--card-w);height:var(--card-h);border-radius:14px;border:1px solid var(--border);background:linear-gradient(135deg,#2d2d32 0%,#1b1b1f 100%);display:flex;flex-direction:column;justify-content:space-between;align-items:center;padding:6px;font-weight:600;color:#fafafa;user-select:none;transition:transform .15s,box-shadow .15s}
+    .card.red{color:var(--danger)}
+    .rank,.suit{font-size:1.05rem}
+    .clickable{cursor:pointer;position:relative;overflow:hidden}
+    .clickable::after{content:"";position:absolute;inset:0;background:#fff4;opacity:0;transition:opacity .2s}
+    .clickable:active::after{opacity:1}
+    .current-card{background:#53142e;border-color:#8b1c48}
+
+    /* ============ BANNERS & LOG ============ */
+    .banner{padding:13px 15px;border-radius:14px;text-align:center;font-weight:600;font-size:.92rem}
+    .banner.success{background:#14532d;color:#c8facc}.banner.fail{background:#7f1d1d;color:#fca5a5}.banner.equal{background:#3c3301;color:#f8e86a}
+    #gameLog{max-height:200px;overflow-y:auto;background:#101014;border:1px solid var(--border);border-radius:16px;padding:14px}
+    .log-entry{margin:3px 0;font-size:.84rem;opacity:.85}
+
+    /* ============ RESPONSIVE ============ */
+    @media(max-width:380px){html{font-size:14px}}
+    @media(max-width:600px){:root{--card-w:52px;--card-h:74px}}
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>🃏 Pasar Lo Mal</h1>
+    <h1>🕹️ Pasar Lo Mal</h1>
+
     <!-- SETUP -->
     <section id="setupPhase" class="panel">
-      <h3>Préparons la partie</h3>
+      <h3>Configuration</h3>
       <label>Nombre de joueurs<br><input type="number" id="nbPlayers" min="2" max="8" value="2"></label>
-      <button class="btn" onclick="prepareNamePills()">Suivant ➜</button>
-      <div id="namesSection" style="display:none;margin-top:16px;">
+      <button class="btn wide" onclick="prepareNamePills()">Suivant ➜</button>
+      <div id="namesSection" style="display:none;margin-top:12px">
         <h3>Pseudos</h3>
-        <div id="pillsWrap" style="display:flex;flex-wrap:wrap;"></div>
-        <button class="btn" onclick="startGame()">Commencer 🔥</button>
+        <div id="pillsWrap" style="display:flex;flex-wrap:wrap"></div>
+        <button class="btn wide" onclick="startGame()">Lancer le jeu 🚀</button>
       </div>
     </section>
+
     <!-- GAME -->
-    <section id="gamePhase" style="display:none;">
-      <div class="panel">
-        <div style="display:flex;gap:24px;flex-wrap:wrap;align-items:center;justify-content:space-between;">
-          <div><strong>Au tour de</strong><br><span id="currentPlayer"></span></div>
-          <div><strong>Tour</strong><br><span id="turnInRound"></span>/3</div>
-          <div><strong>Manche</strong><br><span id="currentRound"></span></div>
-          <div><strong>Pioche</strong><br><span id="cardsLeft"></span></div>
-        </div>
-      </div>
-      <div class="panel" style="text-align:center;">
-        <p style="margin:0 0 12px;">Votre carte</p><span id="drawnCard" class="card current-card">?</span>
-      </div>
-      <p id="instruction" style="text-align:center;font-weight:500;">Cliquez sur une extrémité de ligne.</p>
+    <section id="gamePhase" style="display:none">
+      <div class="panel" id="status"></div>
+      <p id="instruction" style="text-align:center;font-weight:500">Sélectionnez une extrémité.</p>
       <div class="lines" id="gameLines"></div>
-      <div id="resultBanner" class="banner" style="display:none;"></div>
-      <button id="nextTurnBtn" class="btn" style="display:none;">Tour suivant ➜</button>
-      <div id="guessPhase" class="panel" style="display:none;text-align:center;">
-        <p style="margin-bottom:16px;">Votre carte sera…</p>
-        <div style="display:flex;flex-direction:column;gap:12px;max-width:300px;margin:auto;">
-          <button class="btn" onclick="makeGuess('<')">plus PETITE que <span id="compareLT" class="card"></span></button>
-          <button class="btn secondary" onclick="makeGuess('>')">plus GRANDE que <span id="compareGT" class="card"></span></button>
-          <button class="btn secondary" style="border-color:var(--c-warning);color:var(--c-warning);" onclick="makeGuess('=')">ÉGALE à <span id="compareEQ" class="card"></span></button>
-        </div>
+
+      <div class="panel" style="text-align:center">
+        <p style="margin:0 0 8px;font-weight:600">Votre carte</p>
+        <span id="drawnCard" class="card current-card">?</span>
       </div>
-      <button class="btn secondary" onclick="location.reload()">↻ Rejouer</button>
+
+      <!-- Pari -->
+      <div id="guessPhase" class="panel" style="display:none;text-align:center">
+        <p style="margin-bottom:12px;font-weight:500">Votre carte sera…</p>
+        <button class="btn small wide" onclick="makeGuess('<')">plus PETITE <span id="compareLT" class="card"></span></button>
+        <button class="btn small secondary wide" onclick="makeGuess('>')">plus GRANDE <span id="compareGT" class="card"></span></button>
+        <button class="btn small secondary wide" style="border-color:var(--c-warning);color:var(--c-warning)" onclick="makeGuess('=')">ÉGALE <span id="compareEQ" class="card"></span></button>
+      </div>
+
+      <div id="resultBanner" class="banner" style="display:none"></div>
+      <button id="nextTurnBtn" class="btn wide" style="display:none">Tour suivant ➜</button>
+      <button class="btn wide secondary" onclick="location.reload()">↻ Rejouer</button>
     </section>
+
     <!-- LOG -->
-    <section id="gameLog" class="panel" style="display:none;"><h3>Historique</h3><div id="logContent"></div></section>
+    <section id="gameLog" class="panel" style="display:none"><h3>Historique</h3><div id="logContent"></div></section>
   </div>
 
 <script>
-  /* ====== Utilities ====== */
-  const SUITS=['♠','♥','♣','♦']; const $=id=>document.getElementById(id);
-  const cardHTML=c=>`<span class="rank">${c.slice(0,-1)}</span><span class="suit">${c.slice(-1)}</span>`;
-  const applyCard=(el,c)=>{el.innerHTML=cardHTML(c);el.classList.toggle('red',/[♥♦]$/.test(c));};
-  const buildDeck=ranks=>SUITS.flatMap(s=>ranks.map(r=>r+s));
+/***** Helpers *****/
+const $ = id => document.getElementById(id);
+const SUITS=['♠','♥','♣','♦'], RANKS=['A','2','3','4','5','6','7','8','9','10','J','Q','K'];
+const shuffle = arr => arr.sort(()=>Math.random()-0.5);
+const buildDeck = () => shuffle(SUITS.flatMap(s=>RANKS.map(r=>r+s)));
+const applyCard = (el,c) => {el.innerHTML=`<span class='rank'>${c.slice(0,-1)}</span><span class='suit'>${c.slice(-1)}</span>`;el.classList.toggle('red',/[♥♦]$/.test(c));};
+const log = txt => {const lg=$('gameLog');lg.style.display='block';$('logContent').insertAdjacentHTML('beforeend',`<div class='log-entry'>${txt}</div>`);lg.scrollTop=lg.scrollHeight;};
 
-  /* ====== Game class ====== */
-  class Game{
-    constructor(n){this.nb=n;this.ranks=['A','2','3','4','5','6','7','8','9','10','J','Q','K'];this.players=[];this.lines={};this.deck=[];this.p=0;this.round=1;this.turn=0;this.currentCard=null;}
-    rankOf=c=>c.slice(0,-1);
-    cmp=(a,b)=>this.ranks.indexOf(this.rankOf(a))-this.ranks.indexOf(this.rankOf(b));
-    setup(names){this.players=names;this.deck=buildDeck(this.ranks);for(let i=0;i<5;i++){this.lines[i]=[this.deck.splice(Math.random()*this.deck.length|0,1)[0]];} log(`🎲 Partie lancée – ${names.join(', ')}`);}
-    draw(){if(!this.deck.length) throw Error('Fin de pioche');return this.deck.splice(Math.random()*this.deck.length|0,1)[0];}
-    play(card,line,left,op){const L=this.lines[line];const ref=left?L[0]:L[L.length-1];left?L.unshift(card):L.push(card);const d=this.cmp(card,ref);let win=false,pen=0,bonus=0;if(op==='<' )win=d<0;else if(op==='>')win=d>0;else win=d===0;if(!win){pen=L.length;this.deck.push(...L.splice(0));L.push(this.draw());} if(win&&op==='=') bonus=10;return{win,penalty:pen,bonus,ref};}
-  }
+/***** Game Logic *****/
+class Game{
+  constructor(players){this.players=players;this.nb=players.length;this.deck=buildDeck();this.lines=Array.from({length:5},()=>[this.draw()]);this.p=0;this.round=1;this.turn=0;this.current='';}
+  draw(){return this.deck.pop();}
+  cmp(a,b){return RANKS.indexOf(a.slice(0,-1))-RANKS.indexOf(b.slice(0,-1));}
+  play(card,lineIdx,left,op){const L=this.lines[lineIdx],ref=left?L[0]:L[L.length-1];left?L.unshift(card):L.push(card);const d=this.cmp(card,ref);const win=(op=='<'?d<0:op=='>'?d>0:d===0);let pen=0,bonus=0;if(!win){pen=L.length;this.deck.unshift(...L.splice(0));L.push(this.draw());}else if(op==='=')bonus=10;return{win,pen,bonus,ref};}
+}
 
-  /* ====== Globals & helpers ====== */
-  let game,chosenLine=null,chosenLeft=null,compareCode=null; const nextBtn=$('nextTurnBtn');
-  const log=txt=>{$('gameLog').style.display='block';const d=document.createElement('div');d.className='log-entry';d.textContent=txt;$('logContent').append(d);$('logContent').scrollTop=$('logContent').scrollHeight;};
+/***** State *****/
+let game=null, chosenLine=null, chosenLeft=null;const nextBtn=$('nextTurnBtn');
 
-  /* ====== Name pills ====== */
-  function prepareNamePills(){const n=+$('nbPlayers').value;$('setupPhase').querySelector('button').disabled=true;const wrap=$('pillsWrap');wrap.innerHTML='';for(let i=0;i<n;i++){wrap.insertAdjacentHTML('beforeend',`<span class="pill"><input value="Joueur ${i+1}"/> <button onclick="this.parentElement.remove()">×</button></span>`);}$('namesSection').style.display='block';}
-  const collectNames=()=>[...document.querySelectorAll('.pill input')].map(i=>i.value.trim()).filter(Boolean);
+/***** Setup Flow *****/
+function prepareNamePills(){const n=+$('nbPlayers').value;$('setupPhase').querySelector('.btn').disabled=true;const wrap=$('pillsWrap');wrap.innerHTML='';for(let i=0;i<n;i++)wrap.insertAdjacentHTML('beforeend',`<span class="pill"><input value="Joueur ${i+1}"/><button onclick="this.parentElement.remove()">×</button></span>`);$('namesSection').style.display='block';}
+function collectNames(){return[...document.querySelectorAll('.pill input')].map(i=>i.value.trim()).filter(Boolean);} 
+function startGame(){const names=collectNames();if(names.length<2){alert('Au moins deux noms');return;}game=new Game(names);$('setupPhase').style.display='none';$('gamePhase').style.display='block';nextTurn();}
 
-  /* ====== Game flow ====== */
-  function startGame(){const names=collectNames();if(names.length<2){alert('Entrez au moins deux noms');return;}game=new Game(names.length);game.setup(names);$('setupPhase').style.display='none';$('gamePhase').style.display='block';nextTurn();}
-  function render(){$('currentPlayer').textContent=game.players[game.p];$('turnInRound').textContent=game.turn+1;$('currentRound').textContent=game.round;$('cardsLeft').textContent=game.deck.length;const zone=$('gameLines');zone.innerHTML='';for(let i=0;i<5;i++){const row=document.createElement('div');row.className='line';game.lines[i].forEach((card,idx)=>{const s=document.createElement('span');s.className='card';applyCard(s,card);if(idx===0||idx===game.lines[i].length-1){s.classList.add('clickable');s.dataset.line=i;s.dataset.left=idx===0;s.onclick=onCardClick;}row.appendChild(s);});zone.appendChild(row);}}
-  function nextTurn(){if(game.turn>=3){game.turn=0;game.round=game.round%3+1;game.p=(game.p+1)%game.nb;}try{game.currentCard=game.draw();}catch(e){alert(e.message);return;}$('drawnCard').textContent='?';$('drawnCard').classList.remove('red');$('instruction').style.display='block';$('guessPhase').style.display='none';$('resultBanner').style.display='none';nextBtn.style.display='none';chosenLine=chosenLeft=compareCode=null;render();}
+/***** Rendering *****/
+function renderStatus(){$('status').innerHTML=`🃏 <strong>${game.players[game.p]}</strong> | Tour ${game.turn+1}/3 | Manche ${game.round} | Pioche ${game.deck.length}`;}
+function renderLines(){const zone=$('gameLines');zone.innerHTML='';game.lines.forEach((line,i)=>{const rail=document.createElement('div');rail.className='line';line.forEach((c,idx)=>{const span=document.createElement('span');span.className='card';applyCard(span,c);if(idx==0||idx==line.length-1){span.classList.add('clickable');span.dataset.line=i;span.dataset.left=idx==0;span.onclick=onCardClick;}rail.appendChild(span);});zone.appendChild(rail);});}
 
-  /* ====== Interaction ====== */
-  function onCardClick(e){if($('guessPhase').style.display==='block')return;chosenLine=+e.currentTarget.dataset.line;chosenLeft=e.currentTarget.dataset.left==='true';compareCode=e.currentTarget.textContent.trim();['compareLT','compareGT','compareEQ'].forEach(id=>applyCard($(id),compareCode));$('instruction').style.display='none';$('guessPhase').style.display='block';}
-  function makeGuess(op){if(chosenLine===null)return;const {win,penalty,bonus,ref}=game.play(game.currentCard,chosenLine,chosenLeft,op);applyCard($('drawnCard'),game.currentCard);$('guessPhase').style.display='none';const verdict=win?(op==='='?`⭐ Jackpot ! +${bonus}`:'🎉 Bien joué !'):`💧 ${penalty} gorgées`;const cls=win?(op==='='?'equal':'success'):'fail';$('resultBanner').className='banner '+cls;$('resultBanner').innerHTML=`<strong>${game.players[game.p]}</strong> visait ${op==='<'?'plus petit':op==='>'?'plus grand':'égal'} à ${ref}<br>Vous tirez ${game.currentCard}.<br><span style="font-size:1.1rem;">${verdict}</span>`;$('resultBanner').style.display='block';log(`${game.players[game.p]} – ${game.currentCard} (${op}) vs ${ref} : ${win?'OK':'KO'}`);game.turn++;nextBtn.style.display='block';nextBtn.onclick=()=>{nextBtn.style.display='none';nextTurn();};}
+/***** Turn Flow *****/
+function nextTurn(){if(game.turn>=3){game.turn=0;game.round++;game.p=(game.p+1)%game.nb;}try{game.current=game.draw();}catch{return alert('Plus de cartes');}
+  $('drawnCard').textContent='?';$('resultBanner').style.display='none';$('guessPhase').style.display='none';$('instruction').style.display='block';nextBtn.style.display='none';renderStatus();renderLines();}
+
+/***** Interactions *****/
+function onCardClick(ev){if($('guessPhase').style.display==='block')return;chosenLine=+ev.currentTarget.dataset.line;chosenLeft=ev.currentTarget.dataset.left==='true';const ref=ev.currentTarget.textContent.trim();['compareLT','compareGT','compareEQ'].forEach(id=>applyCard($(id),ref));$('instruction').style.display='none';$('guessPhase').style.display='block';navigator.vibrate?.(10);} 
+function makeGuess(op){const {win,pen,bonus,ref}=game.play(game.current,chosenLine,chosenLeft,op);applyCard($('drawnCard'),game.current);$('guessPhase').style.display='none';const banner=$('resultBanner');banner.className='banner '+(win?(op==='='?'equal':'success'):'fail');banner.textContent = win ? (op==='='?`⭐ Jackpot +${bonus}`:'Tu es privé de boisson pour ce tour.') : `💧 ${game.players[game.p]}, tu bois ${pen} gorgées`;banner.style.display='block';log(`${game.players[game.p]} ➜ ${game.current} (${op}) vs ${ref} — ${win?'✅':'❌'}`);game.turn++;nextBtn.style.display='block';nextBtn.onclick=nextTurn;}
 </script>
 </body>
 </html>
